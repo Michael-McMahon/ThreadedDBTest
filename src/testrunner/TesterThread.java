@@ -79,7 +79,7 @@ class TesterThread implements Runnable {
 		}
 
 		// Get actual values to test
-		actualValues = getActualValues(tarCon, getActual);
+		actualValues = getActualValues(getActual);
 		// Stop execution if query fails
 		if (actualValues == null) {
 			// Release lock which main thread is waiting on
@@ -179,8 +179,7 @@ class TesterThread implements Runnable {
 	 * 
 	 * @return ResultSet of keyed values to test.
 	 */
-	private ResultSet getActualValues(Connection tarCon,
-			PreparedStatement getActual) {
+	private ResultSet getActualValues(PreparedStatement getActual) {
 		try {
 			// Query for actual values
 			ResultSet actualValues = getActual.executeQuery();

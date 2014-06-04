@@ -207,14 +207,31 @@ public class TestRunner {
 		}
 	}
 
+	public static boolean verifyDrivers()
+	{
+		try{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver"); 
+		}
+		catch(Exception e)
+		{
+			System.err.println(e.toString());
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public static void main(String[] args) {
 		System.out.println("Starting at: " + new Date().toString());
 
-		if (!StageConnectionManager.verifyDriver()) {
+		//Register drivers
+		if (verifyDrivers()) {
 			System.err.println("JDBC Driver not found. No records were "
 					+ "tested");
 			return;
 		}
+		
 		new TestRunner().runTest();
 
 		System.out.println("Ending at: " + new Date().toString());
